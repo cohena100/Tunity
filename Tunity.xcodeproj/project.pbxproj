@@ -14,6 +14,7 @@
 		04680E0819FBCCE3008C071D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04680E0719FBCCE3008C071D /* Images.xcassets */; };
 		04680E0B19FBCCE3008C071D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04680E0919FBCCE3008C071D /* LaunchScreen.xib */; };
 		04680E1719FBCCE3008C071D /* TunityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04680E1619FBCCE3008C071D /* TunityTests.m */; };
+		04680E2119FBCD32008C071D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04680E2019FBCD32008C071D /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		04680E1019FBCCE3008C071D /* TunityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TunityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04680E1519FBCCE3008C071D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04680E1619FBCCE3008C071D /* TunityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TunityTests.m; sourceTree = "<group>"; };
+		04680E2019FBCD32008C071D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04680E2119FBCD32008C071D /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +66,7 @@
 		04680DEE19FBCCE3008C071D = {
 			isa = PBXGroup;
 			children = (
+				04680E2019FBCD32008C071D /* AVFoundation.framework */,
 				04680DF919FBCCE3008C071D /* Tunity */,
 				04680E1319FBCCE3008C071D /* TunityTests */,
 				04680DF819FBCCE3008C071D /* Products */,
@@ -346,6 +350,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Tunity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -356,6 +361,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Tunity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
