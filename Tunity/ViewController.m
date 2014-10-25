@@ -13,6 +13,7 @@
 @property (strong, nonatomic) AVCaptureSession *session;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (strong, nonatomic) NSMutableArray *pixels;
 
 @end
 
@@ -20,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.pixels = [@[] mutableCopy];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,6 +37,7 @@
         if (self.session.running) {
             [self.session stopRunning];
             [self.startButton setTitle:NSLocalizedString(@"Start", @"Start capturing") forState:UIControlStateNormal];
+            [self logPixels];
         } else {
             [self.session startRunning];
             [self.startButton setTitle:NSLocalizedString(@"Stop", @"Stop capturing") forState:UIControlStateNormal];
@@ -103,6 +105,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     // Create a UIImage from the sample buffer data
     UIImage *image = [self imageFromSampleBuffer:sampleBuffer];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self logCenterPixel:image];
         self.imageView.image = image;
     });
 }
@@ -148,6 +151,27 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     return (image);
 }
 
+- (void)logCenterPixel:(UIImage *)image {
+    int x = image.size.width / 2;
+    int y = image.size.height /2;
+    CFDataRef pixelData = CGDataProviderCopyData(CGImageGetDataProvider(image.CGImage));
+    const UInt8* data = CFDataGetBytePtr(pixelData);
+    
+    int pixelInfo = ((image.size.width  * y) + x ) * 4; // The image is png
+    
+    UInt8 red = data[pixelInfo];         // If you need this info, enable it
+    UInt8 green = data[(pixelInfo + 1)]; // If you need this info, enable it
+    UInt8 blue = data[pixelInfo + 2];    // If you need this info, enable it
+    UInt8 alpha = data[pixelInfo + 3];     // I need only this info for my maze game
+    NSString *pixel = [NSString stringWithFormat:@"(%@, %@, %@, %@)\n", @(red), @(green), @(blue), @(alpha)];
+    [self.pixels addObject:pixel];
+    CFRelease(pixelData);
+    
+}
 
-
+- (void)logPixels {
+    for (NSString *pixel in self.pixels) {
+        NSLog(@"pixel: %@", pixel);
+    }
+}
 @end
